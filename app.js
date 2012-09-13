@@ -1,12 +1,7 @@
 var express = require('express');
 var stylus = require('stylus');
-var nib = require('nib');
-var controllers = new Object();
-controllers.index = require('./controllers/index');
-controllers.overview = require('./controllers/overview');
-controllers.record = require('./controllers/record');
-controllers.projects = require('./controllers/projects');
-var error = require('./controllers/error');
+var nib = require('nib')
+var controllers = require('./controllers');
 
 var mongoose = require('mongoose');
 var db = mongoose.createConnection('mongodb://nodejs-camp-user:zd5EfrgE@alex.mongohq.com:10067/nodejs-camp');
@@ -47,15 +42,15 @@ function startServer() {
         app.use(app.router);
         app.use(express.static(__dirname + '/public'));
         app.use(logErrors);
-        app.use(error.error);
+        app.use(controllers.error);
     });
     
     // Routes
     
-    app.get('/', controllers.index.index);
-	app.get('/overview', controllers.overview.overview);
-	app.get('/record', controllers.record.record);
-	app.get('/projects', controllers.projects.projects);
+    app.get('/', controllers.index);
+	app.get('/overview', controllers.overview);
+	app.get('/record', controllers.record);
+	app.get('/projects', controllers.projects);
     
     // Start app
     

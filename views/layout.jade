@@ -1,0 +1,26 @@
+!!!5
+html
+    head
+        title Timeapp - #{title}
+        link(rel='stylesheet', href='/stylesheets/style.css')
+		script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js')
+    body
+		script(type='text/javascript', src='/javascripts/application.js')
+        header
+            .title
+                h1 #{title}
+            - if (!locals.hideNav)
+                nav
+                    ul
+                        li
+                            a(href="/record") New record
+                        li
+                            a(href="/overview") Overview
+                        li
+                            a(href="/projects") Projects
+        
+        .container
+            .main-content
+                block content
+        footer
+            p Node.js and Express - BU-Camp 2012
